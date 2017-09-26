@@ -1,0 +1,25 @@
+shallow_clone: true
+
+platform:
+  - Win32
+  - x64
+
+image:
+  - Visual Studio 2017
+
+environment:
+  matrix:
+    - VS_VERSION: Visual Studio 15 2017
+    - VS_VERSION: Visual Studio 14 2015
+
+before_build:
+  - ps: |
+      mkdir build
+      cd build
+      cmake .. -G "$env:VS_VERSION" -A "$env:PLATFORM"
+
+build_script:
+  - cmake --build . --config Release
+
+test_script:
+  - ctest -c Release --timeout 300 --output-on-failure
