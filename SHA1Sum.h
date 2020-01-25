@@ -8,6 +8,7 @@
 */
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <cstdint>
 #include <cstring>
@@ -29,7 +30,7 @@ public:
     auto calc = [&](const unsigned char *bd) {
       std::array<uint32_t, 80> w;
 #if __BYTE_ORDER == __LITTLE_ENDIAN
-      for (auto i = 0; i < 16; ++i)
+      for (std::size_t i = 0; i < 16; ++i)
         w[i] = fix_endian(*reinterpret_cast<const uint32_t *>(
             bd + sizeof(uint32_t) * i));
 #elif __BYTE_ORDER == __BIG_ENDIAN
@@ -39,7 +40,7 @@ public:
 
       auto a = h0, b = h1, c = h2, d = h3, e = h4;
 
-      auto calc_w = [&](auto i) {
+      auto calc_w = [&](std::size_t i) {
         return w[i] =
                    leftrotate(w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16], 1);
       };

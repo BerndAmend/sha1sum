@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.8)
 project(sha1sum)
 enable_testing()
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -12,9 +12,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         -Wno-conversion-null -Werror=return-type
         -Wnon-virtual-dtor
         -Woverloaded-virtual
-        $<$<VERSION_GREATER_EQUAL:$<CXX_COMPILER_VERSION>,5.0>:-pedantic>
-        $<$<VERSION_GREATER_EQUAL:$<CXX_COMPILER_VERSION>,4.9>:-fstack-protector-strong>
-        $<$<VERSION_LESS:$<CXX_COMPILER_VERSION>,5.0>:-Wno-missing-field-initializers>
+        -pedantic
+        -fstack-protector-strong
     )
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/W4)
