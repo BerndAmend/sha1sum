@@ -28,7 +28,7 @@ if(SHA1SUM_ENABLE_CLANG_TIDY)
         )
     if(CLANG_TIDY_EXE)
         message(STATUS "Enable clang-tidy: ${CLANG_TIDY_EXE}")
-        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" "-fix" "-checks=*,-cppcoreguidelines-pro-bounds-*,-cppcoreguidelines-pro-type-vararg,-google-build-using-namespace")
+        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" "-checks=*,-cppcoreguidelines-pro-bounds-*,-cppcoreguidelines-pro-type-vararg,-google-build-using-namespace,-llvmlibc*,-fuchsia*,-modernize-use-trailing-return-type")
     endif()
 endif()
 
